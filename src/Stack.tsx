@@ -53,8 +53,8 @@ export function Stack({
 	const isDirectionColumn = direction[0] === "c";
 	const isDirectionReverse = direction.slice(-1) === "e";
 
-	const outerEl = useRef<HTMLElement>(null);
-	const { blockStart, inlineStart } = useLogicalCSSPropertyFallback(outerEl);
+	const elementRef = useRef<HTMLElement>(null);
+	const { blockStart, inlineStart } = useLogicalCSSPropertyFallback(elementRef);
 	const spacerClassName = css({
 		[`margin-${
 			isDirectionColumn
@@ -65,7 +65,7 @@ export function Stack({
 
 	return (
 		<Element
-			ref={outerEl}
+			ref={elementRef}
 			className={css({
 				display: "flex",
 				flexDirection: direction,

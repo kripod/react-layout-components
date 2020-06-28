@@ -20,8 +20,8 @@ type CSSPropertyJustifyContent = Exclude<
 export type StackProps = {
 	as?: React.ElementType;
 	childWrapper?: React.ElementType;
-	children?: React.ReactNode;
 	spacing?: CSSProperties["gap"];
+	children?: React.ReactNode;
 } & (
 	| {
 			direction?: "column" | "column-reverse";

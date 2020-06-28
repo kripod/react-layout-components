@@ -1,11 +1,18 @@
 import { css } from "otion";
 import * as React from "react";
 
-import { CSSProperties } from "./utils";
+import {
+	CSSProperties,
+	CSSPropertyAlignItems,
+	CSSPropertyJustifyContent,
+	prefixFlexAlignmentValue,
+} from "./utils";
 
 export type ClusterProps = {
 	as?: React.ElementType;
 	childWrapper?: React.ElementType;
+	alignInline?: CSSPropertyJustifyContent;
+	alignBlock?: CSSPropertyAlignItems;
 	spacing?: CSSProperties["gap"];
 	children?: React.ReactNode;
 };
@@ -13,6 +20,8 @@ export type ClusterProps = {
 export function Cluster({
 	as: Element = "div",
 	childWrapper: ChildWrapper = "div",
+	alignInline,
+	alignBlock,
 	spacing,
 	children,
 }: ClusterProps): JSX.Element {
@@ -32,6 +41,8 @@ export function Cluster({
 				className={css({
 					display: "flex",
 					flexWrap: "wrap",
+					alignItems: prefixFlexAlignmentValue(alignBlock),
+					justifyContent: prefixFlexAlignmentValue(alignInline),
 					margin: halfSpacingFallback && [
 						`-${halfSpacingFallback}`,
 						`calc(-${spacingWithUnit}/2)`,

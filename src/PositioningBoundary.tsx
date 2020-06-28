@@ -2,7 +2,7 @@ import { css } from "otion";
 import * as React from "react";
 
 export interface PositioningBoundaryProps {
-	children: React.ReactNode;
+	children?: React.ReactNode;
 }
 
 export function PositioningBoundary({

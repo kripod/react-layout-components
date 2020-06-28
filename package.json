@@ -15,7 +15,17 @@
 	"commitlint": {
 		"extends": [
 			"@commitlint/config-conventional"
-		]
+		],
+		"rules": {
+			"scope-case": [
+				2,
+				"always",
+				[
+					"pascal-case",
+					"camel-case"
+				]
+			]
+		}
 	},
 	"lint-staged": {
 		"*.{ts,tsx,json,yml,md}": "prettier --write",

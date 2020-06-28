@@ -3,28 +3,24 @@
 import { css } from "otion";
 import * as React from "react";
 import { useRef } from "react";
-import { Box, PolymorphicComponentProps } from "react-polymorphic-box";
 
 import { useLogicalCSSPropertyFallback } from "./useLogicalCSSPropertyFallback";
-import { CSSProperties, PropsOf } from "./utils";
+import { CSSProperties } from "./utils";
 
-type CSSPropertyJustifyContent = Exclude<
-	CSSProperties["justifyContent"],
-	"flex-end" | "flex-start"
->;
 type CSSPropertyAlignItems = Exclude<
 	CSSProperties["alignItems"],
 	"flex-end" | "flex-start"
 >;
-
-function prefixAlignmentValue(value: string | undefined): string | undefined {
-	// Transform "end"/"start" into the more supported "flex-end"/"flex-start"
-	return value === "end" || value === "start" ? `flex-${value}` : value;
-}
+type CSSPropertyJustifyContent = Exclude<
+	CSSProperties["justifyContent"],
+	"flex-end" | "flex-start"
+>;
 
 // TODO: Consider deprecating "direction" in favor of the Cluster component
-export type StackOwnProps = {
+export type StackProps = {
+	as?: React.ElementType;
 	childWrapper?: React.ElementType;
+	children?: React.ReactNode;
 	spacing?: CSSProperties["gap"];
 } & (
 	| {
@@ -39,77 +35,59 @@ export type StackOwnProps = {
 	  }
 );
 
-export type StackProps<E extends React.ElementType> = PolymorphicComponentProps<
-	E,
-	StackOwnProps
->;
+function prefixAlignmentValue(value: string | undefined): string | undefined {
+	// Transform "end"/"start" into the more supported "flex-end"/"flex-start"
+	return value === "end" || value === "start" ? `flex-${value}` : value;
+}
 
-const defaultElement = "div";
-
-export function Stack<E extends React.ElementType = typeof defaultElement>({
+export function Stack({
+	as: Element = "div",
 	childWrapper: ChildWrapper = "div",
 	direction = "column", // Encourage a mobile-first design by default
 	alignInline,
 	alignBlock,
 	spacing,
-	className,
 	children,
-	...restProps
-}: StackProps<E>): JSX.Element {
-	const outerEl = useRef<PropsOf<E>["ref"]>(null);
+}: StackProps): JSX.Element {
+	const lastChildIndex = React.Children.count(children) - 1;
+	const isDirectionColumn = direction[0] === "c";
+	const isDirectionReverse = direction.slice(-1) === "e";
 
+	const outerEl = useRef<HTMLElement>(null);
 	const { blockStart, inlineStart } = useLogicalCSSPropertyFallback(outerEl);
-	const marginBlockStartProperty = `margin${
-		blockStart
-			? blockStart[0].toUpperCase() + blockStart.slice(1)
-			: "BlockStart"
-	}`;
-	const marginInlineStartProperty = `margin${
-		inlineStart
-			? inlineStart[0].toUpperCase() + inlineStart.slice(1)
-			: "InlineStart"
-	}`;
-
-	const isDirectionColumn = direction[0] === "c"; // "column", "column-reverse"
+	const spacerClassName = css({
+		[`margin-${
+			isDirectionColumn
+				? blockStart || "block-start"
+				: inlineStart || "inline-start"
+		}`]: spacing,
+	});
 
 	return (
-		<Box
+		<Element
 			ref={outerEl}
-			as={defaultElement}
-			className={
-				(className ? `${className} ` : "") +
-				css({
-					display: "flex",
-					flexDirection: direction,
-					alignItems: prefixAlignmentValue(
-						isDirectionColumn ? alignInline : alignBlock,
-					),
-					justifyContent: prefixAlignmentValue(
-						isDirectionColumn ? alignBlock : alignInline,
-					),
-				})
-			}
-			{...restProps}
+			className={css({
+				display: "flex",
+				flexDirection: direction,
+				alignItems: prefixAlignmentValue(
+					isDirectionColumn ? alignInline : alignBlock,
+				),
+				justifyContent: prefixAlignmentValue(
+					isDirectionColumn ? alignBlock : alignInline,
+				),
+			})}
 		>
 			{React.Children.map(children, (child, index) => (
 				<ChildWrapper
 					className={
-						(
-							direction.slice(-1) === "e" /* "reverse" */
-								? index < children.length - 1
-								: /* 0 < */ index
-						)
-							? css(
-									isDirectionColumn
-										? { [marginBlockStartProperty]: spacing }
-										: { [marginInlineStartProperty]: spacing },
-							  )
+						index !== (isDirectionReverse ? lastChildIndex : 0)
+							? spacerClassName
 							: undefined
 					}
 				>
 					{child}
 				</ChildWrapper>
 			))}
-		</Box>
+		</Element>
 	);
 }

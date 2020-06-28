@@ -34,11 +34,11 @@ export function useLogicalCSSPropertyFallback(
 		const computedStyle = window.getComputedStyle(ref.current!);
 		const isDirectionRTL = computedStyle.direction === "rtl";
 
+		let blockSize: LogicalCSSPropertyFallbacks["blockSize"] = "width";
+		let blockStart: LogicalCSSPropertyFallbacks["blockStart"] = "top";
 		let inlineStart: LogicalCSSPropertyFallbacks["inlineStart"] = isDirectionRTL
 			? "bottom"
 			: "top";
-		let blockStart: LogicalCSSPropertyFallbacks["blockStart"] = "top";
-		let blockSize: LogicalCSSPropertyFallbacks["blockSize"] = "width";
 
 		const writingMode = computedStyle.writingMode || ""; // Support Opera Mini
 		const writingModeID =
@@ -63,7 +63,7 @@ export function useLogicalCSSPropertyFallback(
 
 		setState({
 			blockSize,
-			inlineSize: blockSize === "width" ? "height" : "width",
+			inlineSize: blockSize[0] === "w" /* "width" */ ? "height" : "width",
 			blockStart,
 			blockEnd: sideOpposites[blockStart],
 			inlineStart,

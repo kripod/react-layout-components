@@ -1,16 +1,13 @@
 /* Inspired by: https://sid.st/unpolished/flex-gap-polyfill/ */
 
-import * as CSS from "csstype";
 import { css } from "otion";
 import * as React from "react";
 import { useRef } from "react";
 import { Box, PolymorphicComponentProps } from "react-polymorphic-box";
 
 import { useLogicalCSSPropertyFallback } from "./useLogicalCSSPropertyFallback";
-import { PropsOf } from "./utils";
+import { CSSProperties, PropsOf } from "./utils";
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-type CSSProperties = CSS.Properties<(string & {}) | number>;
 type CSSPropertyJustifyContent = Exclude<
 	CSSProperties["justifyContent"],
 	"flex-end" | "flex-start"

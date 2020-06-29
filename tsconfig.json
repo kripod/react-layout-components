@@ -1,11 +1,7 @@
 {
-	"include": ["./src/"],
+	"include": ["./src/", "./types/"],
+	"extends": "@snowpack/app-scripts-react/tsconfig.base.json",
 	"compilerOptions": {
-		"outDir": "./dist/",
-		"strict": true,
-		"target": "ESNext",
-		"moduleResolution": "Node",
-		"isolatedModules": true,
-		"jsx": "react"
+		"isolatedModules": true
 	}
 }

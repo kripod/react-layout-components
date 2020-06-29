@@ -1,5 +1,5 @@
 import { css } from "otion";
-import * as React from "react";
+import React from "react";
 
 export interface PositioningBoundaryProps {
 	children?: React.ReactNode;

@@ -1,8 +1,7 @@
 /* Inspired by: https://sid.st/unpolished/flex-gap-polyfill/ */
 
 import { css } from "otion";
-import * as React from "react";
-import { useRef } from "react";
+import React, { useRef } from "react";
 
 import { useLogicalCSSPropertyFallback } from "./useLogicalCSSPropertyFallback";
 import {

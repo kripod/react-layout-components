@@ -6,6 +6,7 @@
 .eslintcache
 node_modules/
 
-# Package builds
-*.tgz
-dist/
+# Snowpack
+.build/
+build/
+web_modules/

@@ -1,9 +1,10 @@
 {
 	"private": true,
 	"scripts": {
-		"build": "tsc",
+		"build": "snowpack build",
 		"format": "prettier --ignore-path .gitignore --write .",
 		"lint": "eslint --ignore-path .gitignore \"**/*.{ts,tsx}\"",
+		"start": "snowpack dev",
 		"type-check": "tsc --noEmit"
 	},
 	"husky": {
@@ -33,11 +34,14 @@
 	},
 	"dependencies": {
 		"csstype": "^3.0.0-beta.3",
-		"react-polymorphic-box": "^1.1.1"
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^9.0.1",
 		"@commitlint/config-conventional": "^9.0.1",
+		"@snowpack/app-scripts-react": "^1.4.0",
+		"@snowpack/plugin-webpack": "^1.4.0",
 		"@types/react": "^16.9.38",
 		"@types/react-dom": "^16.9.8",
 		"@typescript-eslint/eslint-plugin": "^3.3.0",
@@ -55,8 +59,7 @@
 		"lint-staged": "^10.2.11",
 		"otion": "^0.3.2",
 		"prettier": "^2.0.5",
-		"react": "^16.13.1",
-		"react-dom": "^16.13.1",
+		"snowpack": "^2.6.1",
 		"typescript": "^3.9.5"
 	},
 	"peerDependencies": {

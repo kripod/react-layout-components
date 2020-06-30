@@ -30,7 +30,7 @@ export function Stack({
 	reverse,
 	children,
 }: StackProps): JSX.Element {
-	const lastChildIndex = React.Children.count(children) - 1;
+	const nonSpacedChildIndex = reverse ? React.Children.count(children) - 1 : 0;
 
 	const elementRef = useRef<HTMLElement>(null);
 	const { blockStart } = useLogicalCSSPropertyFallback(elementRef);
@@ -55,9 +55,7 @@ export function Stack({
 			{React.Children.map(children, (child, index) => (
 				<ChildWrapper
 					className={
-						index !== (reverse ? lastChildIndex : 0)
-							? wrapperClassName
-							: undefined
+						index !== nonSpacedChildIndex ? wrapperClassName : undefined
 					}
 				>
 					{child}

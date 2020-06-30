@@ -8,3 +8,9 @@ script:
   - npm run build
   - npm run lint
   - npm run format -- --check --write false
+
+deploy:
+  - provider: pages:git
+    edge: true
+    local_dir: ./build/
+    keep_history: false

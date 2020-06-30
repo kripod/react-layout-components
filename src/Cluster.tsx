@@ -1,6 +1,7 @@
 import { css } from "otion";
 import React from "react";
 
+import { Spacer } from "./Spacer";
 import {
 	CSSProperties,
 	CSSPropertyAlignItems,
@@ -49,9 +50,13 @@ export function Cluster({
 					],
 				})}
 			>
-				{React.Children.map(children, (child) => (
-					<ChildWrapper className={spacerClassName}>{child}</ChildWrapper>
-				))}
+				{React.Children.map(children, (child) =>
+					React.isValidElement(child) && child.type === Spacer ? (
+						child
+					) : (
+						<ChildWrapper className={spacerClassName}>{child}</ChildWrapper>
+					),
+				)}
 			</Element>
 		</div>
 	);

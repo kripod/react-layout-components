@@ -34,9 +34,10 @@ export function Stack({
 
 	const elementRef = useRef<HTMLElement>(null);
 	const { blockStart } = useLogicalCSSPropertyFallback(elementRef);
-	const spacerClassName = css({
-		[`margin-${blockStart || "block-start"}`]: spacing,
-	});
+
+	const wrapperClassName =
+		// Empty string gets discarded
+		css({ [`margin-${blockStart || "block-start"}`]: spacing }) || undefined;
 
 	return (
 		<Element
@@ -46,13 +47,16 @@ export function Stack({
 				flexDirection: "column",
 				alignItems: prefixFlexAlignmentValue(alignInline),
 				justifyContent: prefixFlexAlignmentValue(alignBlock),
+				":only-child": {
+					height: "100%",
+				},
 			})}
 		>
 			{React.Children.map(children, (child, index) => (
 				<ChildWrapper
 					className={
 						index !== (reverse ? lastChildIndex : 0)
-							? spacerClassName
+							? wrapperClassName
 							: undefined
 					}
 				>

@@ -16,20 +16,21 @@ export type LogicalCSSPropertyFallbacks = {
 	inlineEnd?: keyof typeof sideOpposites;
 };
 
+const hasNativeSupport =
+	typeof CSS !== "undefined" /* Support IE 9+ and SSR */ &&
+	CSS.supports("margin-block-end", "0"); /* Covers "{block,inline}-size", too */
+
 export function useLogicalCSSPropertyFallback(
 	ref: React.RefObject<HTMLElement>,
 ): LogicalCSSPropertyFallbacks {
+	// Avoid overhead when no fallback is required
+	if (hasNativeSupport) return {};
+
+	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const [state, setState] = useState({});
 
+	// eslint-disable-next-line react-hooks/rules-of-hooks
 	useEffect(() => {
-		if (
-			typeof CSS !== "undefined" && // Support IE 9+
-			CSS.supports("margin-block-end", "0") // Covers "{block,inline}-size", too
-		) {
-			// Avoid rerendering when no fallback is required
-			return;
-		}
-
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const computedStyle = window.getComputedStyle(ref.current!);
 		const isDirectionRTL = computedStyle.direction === "rtl";

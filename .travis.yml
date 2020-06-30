@@ -15,4 +15,5 @@ deploy:
     local_dir: ./build/
     keep_history: false
     on:
+      branch: main
       node_js: 12

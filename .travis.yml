@@ -14,3 +14,5 @@ deploy:
     edge: true
     local_dir: ./build/
     keep_history: false
+    on:
+      node_js: 12

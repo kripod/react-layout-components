@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 
 const sideOpposites = {
 	top: "bottom",
-	bottom: "top",
 	left: "right",
 	right: "left",
+	bottom: "top",
 };
 
 export type LogicalCSSPropertyFallbacks = {
@@ -35,11 +35,11 @@ export function useLogicalCSSPropertyFallback(
 		const computedStyle = window.getComputedStyle(ref.current!);
 		const isDirectionRTL = computedStyle.direction === "rtl";
 
-		let blockSize: LogicalCSSPropertyFallbacks["blockSize"] = "width";
 		let blockStart: LogicalCSSPropertyFallbacks["blockStart"] = "top";
 		let inlineStart: LogicalCSSPropertyFallbacks["inlineStart"] = isDirectionRTL
 			? "bottom"
 			: "top";
+		let blockSize: LogicalCSSPropertyFallbacks["blockSize"] = "width";
 
 		const writingMode = computedStyle.writingMode || ""; // Support Opera Mini
 		const writingModeID =
@@ -58,16 +58,16 @@ export function useLogicalCSSPropertyFallback(
 			blockStart = "left";
 		} else {
 			/* "horizontal-tb" */
-			blockSize = "height";
 			inlineStart = isDirectionRTL ? "right" : "left";
+			blockSize = "height";
 		}
 
 		setState({
+			blockStart,
+			inlineStart,
 			blockSize,
 			inlineSize: blockSize[0] === "w" /* "width" */ ? "height" : "width",
-			blockStart,
 			blockEnd: sideOpposites[blockStart],
-			inlineStart,
 			inlineEnd: sideOpposites[inlineStart],
 		});
 	}, [ref]);

@@ -8,6 +8,7 @@ script:
   - npm run build
   - npm run lint
   - npm run format -- --check --write false
+  - echo -n react-layout-components.js.org > ./build/CNAME
 
 deploy:
   - provider: pages:git

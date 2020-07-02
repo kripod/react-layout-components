@@ -1,5 +1,6 @@
 /* Source of example texts: https://developer.mozilla.org/en-US/docs/Web/CSS/writing-mode#Example */
 
+import type { Property as CSSProperty } from "csstype";
 import { css } from "otion";
 import React from "react";
 
@@ -40,7 +41,11 @@ export default function App(): JSX.Element {
 			</div>
 
 			<h3>Vertical script</h3>
-			<div className={css({ writingMode: "vertical-rl" })}>
+			<div
+				className={css({
+					writingMode: ["tb-rl" as CSSProperty.WritingMode, "vertical-rl"],
+				})}
+			>
 				<Cluster spacing="2em">
 					<div>我家没有电脑。</div>
 					<Spacer />

@@ -32,6 +32,9 @@
 		"*.{ts,tsx,json,yml,md}": "prettier --write",
 		"*.{ts,tsx}": "eslint --fix"
 	},
+	"browserslist": [
+		"defaults"
+	],
 	"dependencies": {
 		"csstype": "^3.0.0-beta.3",
 		"react": "^16.13.1",

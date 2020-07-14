@@ -46,24 +46,30 @@ export function Cluster({
 			  spacing && `-${spacing}`;
 
 	return (
-		<Element
-			ref={elementRef}
+		<div
 			className={css({
-				display: "flex",
-				flexWrap: "wrap",
-				alignItems: prefixFlexAlignmentValue(alignBlock),
-				justifyContent: prefixFlexAlignmentValue(alignInline),
-				[marginBlockStartProperty]: negativeSpacing,
-				[marginInlineStartProperty]: negativeSpacing,
+				overflow: "hidden", // Suppress unwanted scrolling
 			})}
 		>
-			{React.Children.map(children, (child) =>
-				React.isValidElement(child) && child.type === Spacer ? (
-					child
-				) : (
-					<ChildWrapper className={wrapperClassName}>{child}</ChildWrapper>
-				),
-			)}
-		</Element>
+			<Element
+				ref={elementRef}
+				className={css({
+					display: "flex",
+					flexWrap: "wrap",
+					alignItems: prefixFlexAlignmentValue(alignBlock),
+					justifyContent: prefixFlexAlignmentValue(alignInline),
+					[marginBlockStartProperty]: negativeSpacing,
+					[marginInlineStartProperty]: negativeSpacing,
+				})}
+			>
+				{React.Children.map(children, (child) =>
+					React.isValidElement(child) && child.type === Spacer ? (
+						child
+					) : (
+						<ChildWrapper className={wrapperClassName}>{child}</ChildWrapper>
+					),
+				)}
+			</Element>
+		</div>
 	);
 }

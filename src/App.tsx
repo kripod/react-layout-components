@@ -10,7 +10,7 @@ import { Stack } from "./Stack";
 
 export default function App(): JSX.Element {
 	return (
-		<>
+		<div className={css({ overflowX: "hidden" })}>
 			<h1>React Layout Components</h1>
 			<p>
 				Experimentation and examples for cross-browser layout component testing.
@@ -73,6 +73,6 @@ export default function App(): JSX.Element {
 					<div>מלל ארוך לדוגמא</div>
 				</Stack>
 			</div>
-		</>
+		</div>
 	);
 }

@@ -1,5 +1,14 @@
 import { css } from "otion";
 
+// Source: https://css-tricks.com/snippets/css/clear-fix/
+export const clearfix = css({
+	"::after": {
+		content: "''",
+		display: "block",
+		clear: "both",
+	},
+});
+
 export const positioningBoundary = css({ position: "relative" });
 
 export const touchTarget = `${positioningBoundary} ${css({

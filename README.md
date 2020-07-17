@@ -9,3 +9,4 @@ Layout components for React, primarily inspired by [Every Layout](https://every-
 - Cluster ([demo](https://codesandbox.io/s/layout-components-cluster-otcnh?file=/src/App.tsx))
 - Spacer
 - PositioningBoundary
+- TouchTarget

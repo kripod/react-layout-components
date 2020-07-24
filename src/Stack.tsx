@@ -44,7 +44,9 @@ export function Stack({
 			ref={elementRef}
 			className={css({
 				display: "flex",
-				flexDirection: "column",
+				flexDirection: `column${reverse ? "-reverse" : ""}` as
+					| "column"
+					| "column-reverse",
 				alignItems: prefixFlexAlignmentValue(alignInline),
 				justifyContent: prefixFlexAlignmentValue(alignBlock),
 				":only-child": {

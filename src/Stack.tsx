@@ -3,6 +3,7 @@
 import { css } from "otion";
 import React, { useRef } from "react";
 
+import { Spacer } from "./Spacer";
 import { useLogicalCSSPropertyFallback } from "./useLogicalCSSPropertyFallback";
 import {
 	CSSProperties,
@@ -54,15 +55,19 @@ export function Stack({
 				},
 			})}
 		>
-			{React.Children.map(children, (child, index) => (
-				<ChildWrapper
-					className={
-						index !== nonSpacedChildIndex ? wrapperClassName : undefined
-					}
-				>
-					{child}
-				</ChildWrapper>
-			))}
+			{React.Children.map(children, (child, index) =>
+				React.isValidElement(child) && child.type === Spacer ? (
+					child
+				) : (
+					<ChildWrapper
+						className={
+							index !== nonSpacedChildIndex ? wrapperClassName : undefined
+						}
+					>
+						{child}
+					</ChildWrapper>
+				),
+			)}
 		</Element>
 	);
 }

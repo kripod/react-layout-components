@@ -1,7 +1,5 @@
 /* Source of example texts: https://developer.mozilla.org/en-US/docs/Web/CSS/writing-mode#Example */
 
-import "./browserFix";
-
 import type { Property as CSSProperty } from "csstype";
 import { css } from "otion";
 import React from "react";
@@ -10,6 +8,17 @@ import { Cluster } from "./Cluster";
 import { Icon } from "./Icon";
 import { Spacer } from "./Spacer";
 import { Stack } from "./Stack";
+
+const crossSVG = (
+	<svg
+		viewBox="0 0 10 10"
+		stroke="currentColor"
+		strokeWidth={2}
+		focusable={false}
+	>
+		<path d="M1,1 9,9 M9,1 1,9" />
+	</svg>
+);
 
 export default function App(): JSX.Element {
 	return (
@@ -82,43 +91,27 @@ export default function App(): JSX.Element {
 			<h3>Horizontal (LTR) script</h3>
 			<div className={css({ writingMode: "horizontal-tb" })}>
 				<Icon label="Close" hideLabel>
-					<svg viewBox="0 0 10 10" stroke="currentColor" strokeWidth="2">
-						<path d="M1,1 9,9 M9,1 1,9" />
-					</svg>
+					{crossSVG}
 				</Icon>
 				<div>
-					<Icon label="Close symbol">
-						<svg viewBox="0 0 10 10" stroke="currentColor" strokeWidth="2">
-							<path d="M1,1 9,9 M9,1 1,9" />
-						</svg>
-					</Icon>
+					<Icon label="Close symbol">{crossSVG}</Icon>
 				</div>
 				<Icon label="Close symbol" alignLabel="before">
-					<svg viewBox="0 0 10 10" stroke="currentColor" strokeWidth="2">
-						<path d="M1,1 9,9 M9,1 1,9" />
-					</svg>
+					{crossSVG}
 				</Icon>
 			</div>
 
 			<h3>Horizontal (RTL) script</h3>
 			<div className={css({ writingMode: "horizontal-tb", direction: "rtl" })}>
 				<Icon label="Close" hideLabel>
-					<svg viewBox="0 0 10 10" stroke="currentColor" strokeWidth="2">
-						<path d="M1,1 9,9 M9,1 1,9" />
-					</svg>
+					{crossSVG}
 				</Icon>
 				<div>
-					<Icon label="Close symbol">
-						<svg viewBox="0 0 10 10" stroke="currentColor" strokeWidth="2">
-							<path d="M1,1 9,9 M9,1 1,9" />
-						</svg>
-					</Icon>
+					<Icon label="Close symbol">{crossSVG}</Icon>
 				</div>
 				<div>
 					<Icon label="Close" alignLabel="before">
-						<svg viewBox="0 0 10 10" stroke="currentColor" strokeWidth="2">
-							<path d="M1,1 9,9 M9,1 1,9" />
-						</svg>
+						{crossSVG}
 					</Icon>
 				</div>
 			</div>

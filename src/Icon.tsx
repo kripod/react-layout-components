@@ -6,11 +6,17 @@ import { VisuallyHidden } from "./VisuallyHidden";
 
 export interface IconProps {
 	label: string;
-	alignLabel?: "before" | "after" | "collapse";
+	alignLabel?: "before" | "after";
+	hideLabel?: boolean;
 	children?: React.ReactNode;
 }
 
-export function Icon({ label, alignLabel, children }: IconProps): JSX.Element {
+export function Icon({
+	label,
+	alignLabel,
+	hideLabel,
+	children,
+}: IconProps): JSX.Element {
 	return (
 		<div
 			className={css({
@@ -33,11 +39,7 @@ export function Icon({ label, alignLabel, children }: IconProps): JSX.Element {
 
 			<Spacer minSize=".5em" />
 
-			{alignLabel !== "collapse" ? (
-				label
-			) : (
-				<VisuallyHidden>{label}</VisuallyHidden>
-			)}
+			{hideLabel ? <VisuallyHidden>{label}</VisuallyHidden> : label}
 		</div>
 	);
 }

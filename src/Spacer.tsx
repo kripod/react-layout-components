@@ -1,6 +1,14 @@
 import { css } from "otion";
 import React from "react";
 
-export function Spacer(): JSX.Element {
-	return <div className={css({ margin: "auto" })} />;
+export interface SpacerProps {
+	minSize?: string | number;
+}
+
+export function Spacer({ minSize }: SpacerProps): JSX.Element {
+	return (
+		<div
+			className={css({ margin: "auto", minWidth: minSize, minHeight: minSize })}
+		/>
+	);
 }

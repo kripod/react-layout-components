@@ -1,6 +1,8 @@
 import { css } from "otion";
 import React from "react";
 
+import { Spacer } from "./Spacer";
+
 export interface IconProps {
 	label: string;
 	alignLabel?: "before" | "after" | "collapse";
@@ -26,7 +28,7 @@ export function Icon({ label, alignLabel, children }: IconProps): JSX.Element {
 			>
 				{children}
 			</div>
-			<div className={css({ margin: ".25em", alignSelf: "center" })} />
+			<Spacer minSize=".5em" />
 			{label}
 		</div>
 	);

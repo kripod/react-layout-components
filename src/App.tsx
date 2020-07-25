@@ -90,27 +90,33 @@ export default function App(): JSX.Element {
 
 			<h3>Horizontal (LTR) script</h3>
 			<div className={css({ writingMode: "horizontal-tb" })}>
-				<Icon label="Close" hideLabel>
-					{crossSVG}
-				</Icon>
 				<div>
-					<Icon label="Close symbol">{crossSVG}</Icon>
+					<Icon label="Close dialog" hideLabel>
+						{crossSVG}
+					</Icon>
 				</div>
-				<Icon label="Close symbol" alignLabel="before">
-					{crossSVG}
-				</Icon>
+				<div>
+					<Icon label="Close dialog">{crossSVG}</Icon>
+				</div>
+				<div>
+					<Icon label="Close dialog" alignLabel="before">
+						{crossSVG}
+					</Icon>
+				</div>
 			</div>
 
 			<h3>Horizontal (RTL) script</h3>
 			<div className={css({ writingMode: "horizontal-tb", direction: "rtl" })}>
-				<Icon label="Close" hideLabel>
-					{crossSVG}
-				</Icon>
 				<div>
-					<Icon label="Close symbol">{crossSVG}</Icon>
+					<Icon label="Close dialog" hideLabel>
+						{crossSVG}
+					</Icon>
 				</div>
 				<div>
-					<Icon label="Close" alignLabel="before">
+					<Icon label="Close dialog">{crossSVG}</Icon>
+				</div>
+				<div>
+					<Icon label="Close dialog" alignLabel="before">
 						{crossSVG}
 					</Icon>
 				</div>

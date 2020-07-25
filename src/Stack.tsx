@@ -15,9 +15,8 @@ import {
 export type StackProps = {
 	as?: React.ElementType;
 	childWrapper?: React.ElementType;
-	inlineFromWidth?: string | number;
-	alignInline?: CSSPropertyJustifyContent;
-	alignBlock?: CSSPropertyAlignItems;
+	alignInline?: CSSPropertyAlignItems;
+	alignBlock?: CSSPropertyJustifyContent;
 	spacing?: CSSProperties["gap"];
 	reverse?: boolean;
 	children?: React.ReactNode;
@@ -26,61 +25,47 @@ export type StackProps = {
 export function Stack({
 	as: Element = "div",
 	childWrapper: ChildWrapper = "div",
-	inlineFromWidth,
 	alignInline,
 	alignBlock,
 	spacing,
 	reverse,
 	children,
 }: StackProps): JSX.Element {
+	const nonSpacedChildIndex = reverse ? React.Children.count(children) - 1 : 0;
+
 	const elementRef = useRef<HTMLElement>(null);
-	const { blockStart, inlineStart } = useLogicalCSSPropertyFallback(elementRef);
-	const marginBlockStartProperty = `margin-${blockStart || "block-start"}`;
-	const marginInlineStartProperty = `margin-${inlineStart || "inline-start"}`;
+	const { blockStart } = useLogicalCSSPropertyFallback(elementRef);
 
-	const inlineFromWidthWithUnit =
-		typeof inlineFromWidth === "number"
-			? `${inlineFromWidth}px`
-			: inlineFromWidth;
-	const wrapperClassName = css({
-		display: "flex",
-		justifyContent: prefixFlexAlignmentValue(alignInline),
-		flexBasis: inlineFromWidthWithUnit
-			? `calc(((${inlineFromWidthWithUnit}) - (100% - (${
-					+(spacing || 0) === 0 ? "0px" : spacing
-			  })))*999)`
-			: undefined,
-		flexGrow: 1,
-		[marginBlockStartProperty]: spacing,
-		[marginInlineStartProperty]: spacing,
-	});
-
-	const negativeSpacing =
-		typeof spacing === "number"
-			? -spacing
-			: // Handles `undefined` with short-circuiting
-			  spacing && `-${spacing}`;
+	const wrapperClassName =
+		// Empty string gets discarded
+		css({ [`margin-${blockStart || "block-start"}`]: spacing }) || undefined;
 
 	return (
 		<Element
 			ref={elementRef}
 			className={css({
 				display: "flex",
-				flexDirection: reverse ? "row-reverse" : undefined,
-				flexWrap: "wrap",
-				alignItems: prefixFlexAlignmentValue(alignBlock),
-				[marginBlockStartProperty]: negativeSpacing,
-				[marginInlineStartProperty]: negativeSpacing,
+				flexDirection: `column${reverse ? "-reverse" : ""}` as
+					| "column"
+					| "column-reverse",
+				alignItems: prefixFlexAlignmentValue(alignInline),
+				justifyContent: prefixFlexAlignmentValue(alignBlock),
 				":only-child": {
 					height: "100%",
 				},
 			})}
 		>
-			{React.Children.map(children, (child) =>
+			{React.Children.map(children, (child, index) =>
 				React.isValidElement(child) && child.type === Spacer ? (
 					child
 				) : (
-					<ChildWrapper className={wrapperClassName}>{child}</ChildWrapper>
+					<ChildWrapper
+						className={
+							index !== nonSpacedChildIndex ? wrapperClassName : undefined
+						}
+					>
+						{child}
+					</ChildWrapper>
 				),
 			)}
 		</Element>

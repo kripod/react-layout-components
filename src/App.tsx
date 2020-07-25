@@ -8,6 +8,7 @@ import { Cluster } from "./Cluster";
 import { Icon } from "./Icon";
 import { Spacer } from "./Spacer";
 import { Stack } from "./Stack";
+import { Track } from "./Track";
 
 const crossSVG = (
 	<svg
@@ -70,7 +71,27 @@ export default function App(): JSX.Element {
 
 			<h3>Horizontal (LTR) script</h3>
 			<div className={css({ writingMode: "horizontal-tb" })}>
-				<Stack inlineFromWidth={600} alignBlock="center" spacing="1em">
+				<Stack alignInline="start" spacing="1em">
+					<div>Example text</div>
+					<div>Example text</div>
+					<div>Example text</div>
+				</Stack>
+			</div>
+
+			<h3>Horizontal (RTL) script</h3>
+			<div className={css({ writingMode: "horizontal-tb", direction: "rtl" })}>
+				<Stack alignInline="start" spacing="1em">
+					<div>מלל ארוך לדוגמא</div>
+					<div>מלל ארוך לדוגמא</div>
+					<div>מלל ארוך לדוגמא</div>
+				</Stack>
+			</div>
+
+			<h2>Track</h2>
+
+			<h3>Horizontal (LTR) script</h3>
+			<div className={css({ writingMode: "horizontal-tb" })}>
+				<Track inlineFromWidth={600} alignBlock="center" spacing="1em">
 					<>
 						Example text 1<br />
 						Example text 2
@@ -78,21 +99,20 @@ export default function App(): JSX.Element {
 					<Spacer minSize={20} />
 					<>Example text 3</>
 					<>Example text 4</>
-				</Stack>
+				</Track>
 			</div>
 
 			<h3>Horizontal (RTL) script</h3>
 			<div className={css({ writingMode: "horizontal-tb", direction: "rtl" })}>
-				<Stack inlineFromWidth={600} alignBlock="center" spacing="1em">
+				<Track inlineFromWidth={600} alignBlock="center" spacing="1em">
 					<>
-						מלל ארוך לדוגמא
-						<br />
-						מלל ארוך לדוגמא
+						Example text 1<br />
+						Example text 2
 					</>
 					<Spacer minSize={20} />
-					<>מלל ארוך לדוגמא</>
-					<>מלל ארוך לדוגמא</>
-				</Stack>
+					<>Example text 3</>
+					<>Example text 4</>
+				</Track>
 			</div>
 
 			<h2>Icon</h2>

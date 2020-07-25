@@ -1,5 +1,7 @@
 /* Source of example texts: https://developer.mozilla.org/en-US/docs/Web/CSS/writing-mode#Example */
 
+import "./browserFix";
+
 import type { Property as CSSProperty } from "csstype";
 import { css } from "otion";
 import React from "react";

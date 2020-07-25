@@ -2,6 +2,7 @@ import { css } from "otion";
 import React from "react";
 
 import { Spacer } from "./Spacer";
+import { VisuallyHidden } from "./VisuallyHidden";
 
 export interface IconProps {
 	label: string;
@@ -28,8 +29,14 @@ export function Icon({ label, alignLabel, children }: IconProps): JSX.Element {
 			>
 				{children}
 			</div>
+
 			<Spacer minSize=".5em" />
-			{label}
+
+			{alignLabel !== "collapse" ? (
+				label
+			) : (
+				<VisuallyHidden>{label}</VisuallyHidden>
+			)}
 		</div>
 	);
 }

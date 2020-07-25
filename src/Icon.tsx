@@ -32,6 +32,10 @@ export function Icon({
 						".75em" /* TODO: Replace with font-specific cap height ratio */,
 						"1cap",
 					],
+					height: [
+						".75em" /* TODO: Replace with font-specific cap height ratio */,
+						"1cap",
+					],
 				})}
 			>
 				{children}

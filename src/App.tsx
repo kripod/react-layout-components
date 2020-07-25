@@ -5,6 +5,7 @@ import { css } from "otion";
 import React from "react";
 
 import { Cluster } from "./Cluster";
+import { Icon } from "./Icon";
 import { Spacer } from "./Spacer";
 import { Stack } from "./Stack";
 
@@ -72,6 +73,42 @@ export default function App(): JSX.Element {
 					<div>מלל ארוך לדוגמא</div>
 					<div>מלל ארוך לדוגמא</div>
 				</Stack>
+			</div>
+
+			<h2>Icon</h2>
+
+			<h3>Horizontal (LTR) script</h3>
+			<div className={css({ writingMode: "horizontal-tb" })}>
+				<div>
+					<Icon label="Close symbol">
+						<svg viewBox="0 0 10 10" stroke="currentColor" strokeWidth="2">
+							<path d="M1,1 9,9 M9,1 1,9" />
+						</svg>
+					</Icon>
+				</div>
+				<Icon label="Close symbol" alignLabel="before">
+					<svg viewBox="0 0 10 10" stroke="currentColor" strokeWidth="2">
+						<path d="M1,1 9,9 M9,1 1,9" />
+					</svg>
+				</Icon>
+			</div>
+
+			<h3>Horizontal (RTL) script</h3>
+			<div className={css({ writingMode: "horizontal-tb", direction: "rtl" })}>
+				<div>
+					<Icon label="Close symbol">
+						<svg viewBox="0 0 10 10" stroke="currentColor" strokeWidth="2">
+							<path d="M1,1 9,9 M9,1 1,9" />
+						</svg>
+					</Icon>
+				</div>
+				<div>
+					<Icon label="Close" alignLabel="before">
+						<svg viewBox="0 0 10 10" stroke="currentColor" strokeWidth="2">
+							<path d="M1,1 9,9 M9,1 1,9" />
+						</svg>
+					</Icon>
+				</div>
 			</div>
 		</div>
 	);

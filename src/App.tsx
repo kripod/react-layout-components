@@ -92,34 +92,26 @@ export default function App(): JSX.Element {
 			<h3>Horizontal (LTR) script</h3>
 			<div className={css({ writingMode: "horizontal-tb" })}>
 				<Track inlineFromWidth={600} alignBlock="center" spacing="1em">
-					<div className={css({ width: "100%", background: "lightpink" })}>
+					<div className={css({ background: "lightpink" })}>
 						Example text
 						<br />
 						Example text
 					</div>
-					<div className={css({ width: "100%", background: "lightgreen" })}>
-						Example text
-					</div>
-					<div className={css({ width: "100%", background: "skyblue" })}>
-						Example text
-					</div>
+					<div className={css({ background: "lightgreen" })}>Example text</div>
+					<div className={css({ background: "skyblue" })}>Example text</div>
 				</Track>
 			</div>
 
 			<h3>Horizontal (RTL) script</h3>
 			<div className={css({ writingMode: "horizontal-tb", direction: "rtl" })}>
 				<Track inlineFromWidth={600} alignBlock="center" spacing="1em">
-					<div className={css({ width: "100%", background: "lightpink" })}>
+					<div className={css({ background: "lightpink" })}>
 						Example text
 						<br />
 						Example text
 					</div>
-					<div className={css({ width: "100%", background: "lightgreen" })}>
-						Example text
-					</div>
-					<div className={css({ width: "100%", background: "skyblue" })}>
-						Example text
-					</div>
+					<div className={css({ background: "lightgreen" })}>Example text</div>
+					<div className={css({ background: "skyblue" })}>Example text</div>
 				</Track>
 			</div>
 

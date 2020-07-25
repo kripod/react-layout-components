@@ -42,8 +42,6 @@ export function Track({
 	const wrapperClassName =
 		// Empty string gets discarded
 		css({
-			display: "flex",
-			justifyContent: "center",
 			flexBasis: inlineFromWidthWithUnit
 				? `calc(((${inlineFromWidthWithUnit}) - (100% - (${
 						+(spacing || 0) === 0 ? "0px" : spacing

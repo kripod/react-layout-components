@@ -2,7 +2,7 @@ import { css } from "otion";
 import React from "react";
 
 export interface VisuallyHiddenProps {
-	children?: React.ReactElement;
+	children?: React.ReactNode;
 }
 
 export function VisuallyHidden({ children }: VisuallyHiddenProps): JSX.Element {

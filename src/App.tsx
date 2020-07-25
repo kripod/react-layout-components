@@ -36,10 +36,10 @@ export default function App(): JSX.Element {
 			<h3>Horizontal (LTR) script</h3>
 			<div className={css({ writingMode: "horizontal-tb" })}>
 				<Cluster spacing="2em">
-					<div>Example text</div>
+					<div>Example text 1</div>
 					<Spacer />
-					<div>Example text</div>
-					<div>Example text</div>
+					<div>Example text 2</div>
+					<div>Example text 3</div>
 				</Cluster>
 			</div>
 
@@ -72,9 +72,9 @@ export default function App(): JSX.Element {
 			<h3>Horizontal (LTR) script</h3>
 			<div className={css({ writingMode: "horizontal-tb" })}>
 				<Stack alignInline="start" spacing="1em">
-					<div>Example text</div>
-					<div>Example text</div>
-					<div>Example text</div>
+					<div>Example text 1</div>
+					<div>Example text 2</div>
+					<div>Example text 3</div>
 				</Stack>
 			</div>
 
@@ -106,12 +106,13 @@ export default function App(): JSX.Element {
 			<div className={css({ writingMode: "horizontal-tb", direction: "rtl" })}>
 				<Track inlineFromWidth={600} alignBlock="center" spacing="1em">
 					<>
-						Example text 1<br />
-						Example text 2
+						מלל ארוך לדוגמא
+						<br />
+						מלל ארוך לדוגמא
 					</>
 					<Spacer minSize={20} />
-					<>Example text 3</>
-					<>Example text 4</>
+					<>מלל ארוך לדוגמא</>
+					<>מלל ארוך לדוגמא</>
 				</Track>
 			</div>
 

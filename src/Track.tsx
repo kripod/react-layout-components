@@ -3,7 +3,6 @@
 import { css } from "otion";
 import React, { useRef } from "react";
 
-import { Spacer } from "./Spacer";
 import { useLogicalCSSPropertyFallback } from "./useLogicalCSSPropertyFallback";
 import {
 	CSSProperties,
@@ -73,13 +72,9 @@ export function Track({
 				[marginInlineStartProperty]: negativeSpacing,
 			})}
 		>
-			{React.Children.map(children, (child) =>
-				React.isValidElement(child) && child.type === Spacer ? (
-					child
-				) : (
-					<ChildWrapper className={wrapperClassName}>{child}</ChildWrapper>
-				),
-			)}
+			{React.Children.map(children, (child) => (
+				<ChildWrapper className={wrapperClassName}>{child}</ChildWrapper>
+			))}
 		</Element>
 	);
 }

@@ -10,6 +10,7 @@ Layout components for React, primarily inspired by [Every Layout](https://every-
 - Spacer
 - AspectRatioBox
 - Icon
+- VisuallyHidden
 
 Mixins:
 

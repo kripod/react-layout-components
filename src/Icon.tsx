@@ -1,7 +1,5 @@
 import { css } from "otion";
-import React, { useRef } from "react";
-
-import { useLogicalCSSPropertyFallback } from "./useLogicalCSSPropertyFallback";
+import React from "react";
 
 export interface IconProps {
 	label: string;
@@ -28,7 +26,7 @@ export function Icon({ label, alignLabel, children }: IconProps): JSX.Element {
 			>
 				{children}
 			</div>
-			<div className={css({ margin: ".25em" })} />
+			<div className={css({ margin: ".25em", alignSelf: "center" })} />
 			{label}
 		</div>
 	);

@@ -20,6 +20,7 @@ export function Icon({ label, alignLabel, children }: IconProps): JSX.Element {
 			})}
 		>
 			<div
+				aria-hidden
 				className={css({
 					width: [
 						".75em" /* TODO: Replace with font-specific cap height ratio */,

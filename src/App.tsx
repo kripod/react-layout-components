@@ -79,6 +79,11 @@ export default function App(): JSX.Element {
 
 			<h3>Horizontal (LTR) script</h3>
 			<div className={css({ writingMode: "horizontal-tb" })}>
+				<Icon label="Close" hideLabel>
+					<svg viewBox="0 0 10 10" stroke="currentColor" strokeWidth="2">
+						<path d="M1,1 9,9 M9,1 1,9" />
+					</svg>
+				</Icon>
 				<div>
 					<Icon label="Close symbol">
 						<svg viewBox="0 0 10 10" stroke="currentColor" strokeWidth="2">
@@ -95,6 +100,11 @@ export default function App(): JSX.Element {
 
 			<h3>Horizontal (RTL) script</h3>
 			<div className={css({ writingMode: "horizontal-tb", direction: "rtl" })}>
+				<Icon label="Close" hideLabel>
+					<svg viewBox="0 0 10 10" stroke="currentColor" strokeWidth="2">
+						<path d="M1,1 9,9 M9,1 1,9" />
+					</svg>
+				</Icon>
 				<div>
 					<Icon label="Close symbol">
 						<svg viewBox="0 0 10 10" stroke="currentColor" strokeWidth="2">

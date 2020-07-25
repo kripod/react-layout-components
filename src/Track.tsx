@@ -7,6 +7,7 @@ import { Spacer } from "./Spacer";
 import { useLogicalCSSPropertyFallback } from "./useLogicalCSSPropertyFallback";
 import {
 	CSSProperties,
+	CSSPropertyAlignItems,
 	CSSPropertyJustifyContent,
 	prefixFlexAlignmentValue,
 } from "./utils";
@@ -15,7 +16,8 @@ export type TrackProps = {
 	as?: React.ElementType;
 	childWrapper?: React.ElementType;
 	inlineFromWidth?: string | number;
-	alignBlock?: CSSPropertyJustifyContent;
+	alignInline?: CSSPropertyJustifyContent;
+	alignBlock?: CSSPropertyAlignItems;
 	spacing?: CSSProperties["gap"];
 	reverse?: boolean;
 	children?: React.ReactNode;
@@ -25,6 +27,7 @@ export function Track({
 	as: Element = "div",
 	childWrapper: ChildWrapper = "div",
 	inlineFromWidth,
+	alignInline,
 	alignBlock,
 	spacing,
 	reverse,
@@ -39,18 +42,18 @@ export function Track({
 		typeof inlineFromWidth === "number"
 			? `${inlineFromWidth}px`
 			: inlineFromWidth;
-	const wrapperClassName =
-		// Empty string gets discarded
-		css({
-			flexBasis: inlineFromWidthWithUnit
-				? `calc(((${inlineFromWidthWithUnit}) - (100% - (${
-						+(spacing || 0) === 0 ? "0px" : spacing
-				  })))*999)`
-				: undefined,
-			flexGrow: 1,
-			[marginBlockStartProperty]: spacing,
-			[marginInlineStartProperty]: spacing,
-		}) || undefined;
+	const wrapperClassName = css({
+		display: "flex",
+		justifyContent: prefixFlexAlignmentValue(alignInline),
+		flexBasis: inlineFromWidthWithUnit
+			? `calc(((${inlineFromWidthWithUnit}) - (100% - (${
+					+(spacing || 0) === 0 ? "0px" : spacing
+			  })))*999)`
+			: undefined,
+		flexGrow: 1,
+		[marginBlockStartProperty]: spacing,
+		[marginInlineStartProperty]: spacing,
+	});
 
 	const negativeSpacing =
 		typeof spacing === "number"

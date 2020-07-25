@@ -92,26 +92,26 @@ export default function App(): JSX.Element {
 			<h3>Horizontal (LTR) script</h3>
 			<div className={css({ writingMode: "horizontal-tb" })}>
 				<Track inlineFromWidth={600} alignBlock="center" spacing="1em">
-					<div className={css({ background: "lightpink" })}>
-						Example text
-						<br />
-						Example text
-					</div>
-					<div className={css({ background: "lightgreen" })}>Example text</div>
-					<div className={css({ background: "skyblue" })}>Example text</div>
+					<>
+						Example text 1<br />
+						Example text 2
+					</>
+					<Spacer minSize={20} />
+					<>Example text 3</>
+					<>Example text 4</>
 				</Track>
 			</div>
 
 			<h3>Horizontal (RTL) script</h3>
 			<div className={css({ writingMode: "horizontal-tb", direction: "rtl" })}>
 				<Track inlineFromWidth={600} alignBlock="center" spacing="1em">
-					<div className={css({ background: "lightpink" })}>
-						Example text
-						<br />
-						Example text
-					</div>
-					<div className={css({ background: "lightgreen" })}>Example text</div>
-					<div className={css({ background: "skyblue" })}>Example text</div>
+					<>
+						Example text 1<br />
+						Example text 2
+					</>
+					<Spacer minSize={20} />
+					<>Example text 3</>
+					<>Example text 4</>
 				</Track>
 			</div>
 

@@ -37,9 +37,14 @@ export function Icon({
 				{children}
 			</div>
 
-			<Spacer minSize=".5em" />
-
-			{hideLabel ? <VisuallyHidden>{label}</VisuallyHidden> : label}
+			{hideLabel ? (
+				<VisuallyHidden>{label}</VisuallyHidden>
+			) : (
+				<>
+					<Spacer minSize=".5em" />
+					{label}
+				</>
+			)}
 		</div>
 	);
 }

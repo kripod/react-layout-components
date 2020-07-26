@@ -8,7 +8,7 @@ Layout components for React, primarily inspired by [Every Layout](https://every-
 - Stack ([demo](https://codesandbox.io/s/layout-components-stack-1xnx3?file=/src/App.tsx))
 - Cluster ([demo](https://codesandbox.io/s/layout-components-cluster-otcnh?file=/src/App.tsx))
 - Spacer
-- AspectRatioBox
+- Frame
 - Icon
 - VisuallyHidden
 

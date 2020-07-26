@@ -5,6 +5,7 @@ import { css } from "otion";
 import React from "react";
 
 import { Cluster } from "./Cluster";
+import { Frame } from "./Frame";
 import { Icon } from "./Icon";
 import { Spacer } from "./Spacer";
 import { Stack } from "./Stack";
@@ -151,6 +152,31 @@ export default function App(): JSX.Element {
 					</Icon>
 				</div>
 			</div>
+
+			<h2>Frame</h2>
+
+			<Track inlineFromWidth={600} alignBlock="start">
+				<Frame aspectRatio={16 / 9}>
+					<img
+						src="https://via.placeholder.com/100x100"
+						alt="Placeholder for 100×100 pixels"
+					/>
+				</Frame>
+				<Frame aspectRatio={21 / 9}>
+					<div>Hello, world!</div>
+				</Frame>
+				<Frame aspectRatio={16 / 9}>
+					<iframe
+						title="Video of Rick Astley's Never Gonna Give You Up"
+						width="560"
+						height="315"
+						src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+						frameBorder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowFullScreen
+					/>
+				</Frame>
+			</Track>
 		</div>
 	);
 }

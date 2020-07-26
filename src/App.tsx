@@ -7,9 +7,9 @@ import React from "react";
 import { Cluster } from "./Cluster";
 import { Frame } from "./Frame";
 import { Icon } from "./Icon";
+import { Lane } from "./Lane";
 import { Spacer } from "./Spacer";
 import { Stack } from "./Stack";
-import { Track } from "./Track";
 
 const crossSVG = (
 	<svg
@@ -88,11 +88,11 @@ export default function App(): JSX.Element {
 				</Stack>
 			</div>
 
-			<h2>Track</h2>
+			<h2>Lane</h2>
 
 			<h3>Horizontal (LTR) script</h3>
 			<div className={css({ writingMode: "horizontal-tb" })}>
-				<Track inlineFromWidth={600} alignBlock="center" spacing="1em">
+				<Lane inlineFromWidth={600} alignBlock="center" spacing="1em">
 					<>
 						Example text 1<br />
 						Example text 2
@@ -100,12 +100,12 @@ export default function App(): JSX.Element {
 					<Spacer minSize={20} />
 					<>Example text 3</>
 					<>Example text 4</>
-				</Track>
+				</Lane>
 			</div>
 
 			<h3>Horizontal (RTL) script</h3>
 			<div className={css({ writingMode: "horizontal-tb", direction: "rtl" })}>
-				<Track inlineFromWidth={600} alignBlock="center" spacing="1em">
+				<Lane inlineFromWidth={600} alignBlock="center" spacing="1em">
 					<>
 						מלל ארוך לדוגמא
 						<br />
@@ -114,7 +114,7 @@ export default function App(): JSX.Element {
 					<Spacer minSize={20} />
 					<>מלל ארוך לדוגמא</>
 					<>מלל ארוך לדוגמא</>
-				</Track>
+				</Lane>
 			</div>
 
 			<h2>Icon</h2>
@@ -155,7 +155,7 @@ export default function App(): JSX.Element {
 
 			<h2>Frame</h2>
 
-			<Track inlineFromWidth={600} alignBlock="start">
+			<Lane inlineFromWidth={600} alignBlock="start">
 				<Frame aspectRatio={16 / 9} objectPosition="top">
 					<img
 						src="https://via.placeholder.com/100x100"
@@ -175,7 +175,7 @@ export default function App(): JSX.Element {
 						allowFullScreen
 					/>
 				</Frame>
-			</Track>
+			</Lane>
 		</div>
 	);
 }

@@ -11,7 +11,7 @@ import {
 	prefixFlexAlignmentValue,
 } from "./utils";
 
-export type TrackProps = {
+export type LaneProps = {
 	as?: React.ElementType;
 	childWrapper?: React.ElementType;
 	inlineFromWidth?: string | number;
@@ -22,7 +22,7 @@ export type TrackProps = {
 	children?: React.ReactNode;
 };
 
-export function Track({
+export function Lane({
 	as: Element = "div",
 	childWrapper: ChildWrapper = "div",
 	inlineFromWidth,
@@ -31,7 +31,7 @@ export function Track({
 	spacing,
 	reverse,
 	children,
-}: TrackProps): JSX.Element {
+}: LaneProps): JSX.Element {
 	const elementRef = useRef<HTMLElement>(null);
 	const { blockStart, inlineStart } = useLogicalCSSPropertyFallback(elementRef);
 	const marginBlockStartProperty = `margin-${blockStart || "block-start"}`;

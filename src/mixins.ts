@@ -9,9 +9,8 @@ export const clearfix = css({
 	},
 });
 
-export const positioningBoundary = css({ position: "relative" });
-
-export const touchTarget = `${positioningBoundary} ${css({
+export const touchTarget = css({
+	position: "relative",
 	userSelect: "none",
 	"::after": {
 		content: "''",
@@ -24,4 +23,4 @@ export const touchTarget = `${positioningBoundary} ${css({
 		width: "100%",
 		height: "100%",
 	},
-})}`;
+});

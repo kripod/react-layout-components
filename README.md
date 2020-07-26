@@ -14,6 +14,5 @@ Layout components for React, primarily inspired by [Every Layout](https://every-
 
 Mixins:
 
-- `positioningBoundary`
-- `touchTarget` (extends `positioningBoundary`)
+- `touchTarget`
 - `clearfix`

@@ -156,7 +156,7 @@ export default function App(): JSX.Element {
 			<h2>Frame</h2>
 
 			<Track inlineFromWidth={600} alignBlock="start">
-				<Frame aspectRatio={16 / 9}>
+				<Frame aspectRatio={16 / 9} objectPosition="top">
 					<img
 						src="https://via.placeholder.com/100x100"
 						alt="Placeholder for 100×100 pixels"
@@ -168,11 +168,10 @@ export default function App(): JSX.Element {
 				<Frame aspectRatio={16 / 9}>
 					<iframe
 						title="Video of Rick Astley's Never Gonna Give You Up"
-						width="560"
-						height="315"
+						width={560}
+						height={315}
 						src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-						frameBorder="0"
-						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						frameBorder={0}
 						allowFullScreen
 					/>
 				</Frame>

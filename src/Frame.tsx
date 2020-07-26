@@ -1,12 +1,19 @@
 import { css } from "otion";
 import React from "react";
 
+import type { CSSProperties } from "./utils";
+
 export interface FrameProps {
 	aspectRatio: number;
+	objectPosition?: CSSProperties["objectPosition"];
 	children?: React.ReactElement;
 }
 
-export function Frame({ aspectRatio, children }: FrameProps): JSX.Element {
+export function Frame({
+	aspectRatio,
+	objectPosition,
+	children,
+}: FrameProps): JSX.Element {
 	return (
 		<div
 			// Source: https://css-tricks.com/aspect-ratio-boxes/
@@ -22,6 +29,7 @@ export function Frame({ aspectRatio, children }: FrameProps): JSX.Element {
 						width: "100%",
 						height: "100%",
 						objectFit: "cover",
+						objectPosition,
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "center",

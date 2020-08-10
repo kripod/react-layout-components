@@ -9,6 +9,7 @@ import {
 	CSSPropertyAlignItems,
 	CSSPropertyJustifyContent,
 	prefixFlexAlignmentValue,
+	withUnit,
 } from "./utils";
 
 export type LaneProps = {
@@ -39,14 +40,10 @@ export function Lane({
 	const marginBlockStartProperty = `margin-${blockStart || "block-start"}`;
 	const marginInlineStartProperty = `margin-${inlineStart || "inline-start"}`;
 
-	const inlineFromWidthWithUnit =
-		typeof inlineFromWidth === "number"
-			? `${inlineFromWidth}px`
-			: inlineFromWidth;
-	const spacingBlockWithUnit =
-		typeof spacing === "number" ? `${spacing}px` : spacing;
-	const spacingInlineWithUnit =
-		typeof spacingInline === "number" ? `${spacingInline}px` : spacingInline;
+	const inlineFromWidthWithUnit = withUnit(inlineFromWidth);
+	const spacingBlockWithUnit = withUnit(spacing);
+	const spacingInlineWithUnit = withUnit(spacingInline);
+
 	const wrapperClassName = css({
 		display: "flex",
 		justifyContent: prefixFlexAlignmentValue(alignInline),

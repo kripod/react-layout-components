@@ -18,3 +18,9 @@ export function prefixFlexAlignmentValue(
 	// Transform "end"/"start" into the more supported "flex-end"/"flex-start"
 	return value === "end" || value === "start" ? `flex-${value}` : value;
 }
+
+export function withUnit(
+	value: string | number | undefined,
+): string | undefined {
+	return typeof value === "number" ? `${value}px` : value;
+}

@@ -8,6 +8,7 @@ import {
 	CSSPropertyAlignItems,
 	CSSPropertyJustifyContent,
 	prefixFlexAlignmentValue,
+	withUnit,
 } from "./utils";
 
 export type ClusterProps = {
@@ -32,18 +33,15 @@ export function Cluster({
 	const marginBlockStartProperty = `margin-${blockStart || "block-start"}`;
 	const marginInlineStartProperty = `margin-${inlineStart || "inline-start"}`;
 
+	const spacingWithUnit = withUnit(spacing);
+	const negativeSpacingWithUnit = spacingWithUnit && `-${spacingWithUnit}`;
+
 	const wrapperClassName =
 		// Empty string gets discarded
 		css({
-			[marginBlockStartProperty]: spacing,
-			[marginInlineStartProperty]: spacing,
+			[marginBlockStartProperty]: spacingWithUnit,
+			[marginInlineStartProperty]: spacingWithUnit,
 		}) || undefined;
-
-	const negativeSpacing =
-		typeof spacing === "number"
-			? -spacing
-			: // Handles `undefined` with short-circuiting
-			  spacing && `-${spacing}`;
 
 	return (
 		<Element
@@ -53,8 +51,8 @@ export function Cluster({
 				flexWrap: "wrap",
 				alignItems: prefixFlexAlignmentValue(alignBlock),
 				justifyContent: prefixFlexAlignmentValue(alignInline),
-				[marginBlockStartProperty]: negativeSpacing,
-				[marginInlineStartProperty]: negativeSpacing,
+				[marginBlockStartProperty]: negativeSpacingWithUnit,
+				[marginInlineStartProperty]: negativeSpacingWithUnit,
 			})}
 		>
 			{React.Children.map(children, (child) =>

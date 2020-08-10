@@ -17,7 +17,8 @@ export type LaneProps = {
 	inlineFromWidth?: string | number;
 	alignInline?: CSSPropertyJustifyContent;
 	alignBlock?: CSSPropertyAlignItems;
-	spacing?: CSSProperties["gap"];
+	spacing?: CSSProperties["rowGap"];
+	spacingInline?: CSSProperties["columnGap"];
 	reverse?: boolean;
 	children?: React.ReactNode;
 };
@@ -29,6 +30,7 @@ export function Lane({
 	alignInline,
 	alignBlock,
 	spacing,
+	spacingInline = spacing,
 	reverse,
 	children,
 }: LaneProps): JSX.Element {
@@ -41,24 +43,22 @@ export function Lane({
 		typeof inlineFromWidth === "number"
 			? `${inlineFromWidth}px`
 			: inlineFromWidth;
+	const spacingBlockWithUnit =
+		typeof spacing === "number" ? `${spacing}px` : spacing;
+	const spacingInlineWithUnit =
+		typeof spacingInline === "number" ? `${spacingInline}px` : spacingInline;
 	const wrapperClassName = css({
 		display: "flex",
 		justifyContent: prefixFlexAlignmentValue(alignInline),
 		flexBasis: inlineFromWidthWithUnit
 			? `calc(((${inlineFromWidthWithUnit}) - (100% - (${
-					+(spacing || 0) === 0 ? "0px" : spacing
+					spacingInlineWithUnit || "0px"
 			  })))*999)`
 			: undefined,
 		flexGrow: 1,
-		[marginBlockStartProperty]: spacing,
-		[marginInlineStartProperty]: spacing,
+		[marginBlockStartProperty]: spacingBlockWithUnit,
+		[marginInlineStartProperty]: spacingInlineWithUnit,
 	});
-
-	const negativeSpacing =
-		typeof spacing === "number"
-			? -spacing
-			: // Handles `undefined` with short-circuiting
-			  spacing && `-${spacing}`;
 
 	return (
 		<Element
@@ -68,8 +68,10 @@ export function Lane({
 				flexDirection: reverse ? "row-reverse" : undefined,
 				flexWrap: "wrap",
 				alignItems: prefixFlexAlignmentValue(alignBlock),
-				[marginBlockStartProperty]: negativeSpacing,
-				[marginInlineStartProperty]: negativeSpacing,
+				[marginBlockStartProperty]:
+					spacingBlockWithUnit && `-${spacingBlockWithUnit}`,
+				[marginInlineStartProperty]:
+					spacingInlineWithUnit && `-${spacingInlineWithUnit}`,
 			})}
 		>
 			{React.Children.map(children, (child) => (

@@ -18,6 +18,7 @@ export type LogicalCSSPropertyFallbacks = {
 
 const hasNativeSupport =
 	typeof CSS !== "undefined" /* Support IE 9+ and SSR */ &&
+	CSS.supports /* Support SSR */ &&
 	CSS.supports("margin-block-end", "0"); /* Covers "{block,inline}-size", too */
 
 export function useLogicalCSSPropertyFallback(

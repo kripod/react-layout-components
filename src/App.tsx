@@ -1,6 +1,5 @@
 /* Source of example texts: https://developer.mozilla.org/en-US/docs/Web/CSS/writing-mode#Example */
 
-import type { Property as CSSProperty } from "csstype";
 import { css } from "otion";
 import React from "react";
 
@@ -34,8 +33,8 @@ export default function App(): JSX.Element {
 
 			<h2>Cluster</h2>
 
-			<h3>Horizontal (LTR) script</h3>
-			<div className={css({ writingMode: "horizontal-tb" })}>
+			<h3>LTR script</h3>
+			<div className={css({ direction: "ltr" })}>
 				<Cluster spacing="2em">
 					<div>Example text 1</div>
 					<Spacer />
@@ -44,44 +43,30 @@ export default function App(): JSX.Element {
 				</Cluster>
 			</div>
 
-			<h3>Horizontal (RTL) script</h3>
-			<div className={css({ writingMode: "horizontal-tb", direction: "rtl" })}>
+			<h3>RTL script</h3>
+			<div className={css({ direction: "rtl" })}>
 				<Cluster spacing="2em">
 					<div>מלל ארוך לדוגמא</div>
 					<Spacer />
 					<div>מלל ארוך לדוגמא</div>
 					<div>מלל ארוך לדוגמא</div>
-				</Cluster>
-			</div>
-
-			<h3>Vertical script</h3>
-			<div
-				className={css({
-					writingMode: ["tb-rl" as CSSProperty.WritingMode, "vertical-rl"],
-				})}
-			>
-				<Cluster spacing="2em">
-					<div>我家没有电脑。</div>
-					<Spacer />
-					<div>我家没有电脑。</div>
-					<div>我家没有电脑。</div>
 				</Cluster>
 			</div>
 
 			<h2>Stack</h2>
 
-			<h3>Horizontal (LTR) script</h3>
-			<div className={css({ writingMode: "horizontal-tb" })}>
-				<Stack alignInline="start" spacing="1em">
+			<h3>LTR script</h3>
+			<div className={css({ direction: "ltr" })}>
+				<Stack alignX="start" spacing="1em">
 					<div>Example text 1</div>
 					<div>Example text 2</div>
 					<div>Example text 3</div>
 				</Stack>
 			</div>
 
-			<h3>Horizontal (RTL) script</h3>
-			<div className={css({ writingMode: "horizontal-tb", direction: "rtl" })}>
-				<Stack alignInline="start" spacing="1em">
+			<h3>RTL script</h3>
+			<div className={css({ direction: "rtl" })}>
+				<Stack alignX="start" spacing="1em">
 					<div>מלל ארוך לדוגמא</div>
 					<div>מלל ארוך לדוגמא</div>
 					<div>מלל ארוך לדוגמא</div>
@@ -90,9 +75,9 @@ export default function App(): JSX.Element {
 
 			<h2>Lane</h2>
 
-			<h3>Horizontal (LTR) script</h3>
-			<div className={css({ writingMode: "horizontal-tb" })}>
-				<Lane inlineFromWidth={600} alignBlock="center" spacing="1em">
+			<h3>LTR script</h3>
+			<div className={css({ direction: "ltr" })}>
+				<Lane inlineFromWidth={600} alignY="center" spacing="1em">
 					<>
 						Example text 1<br />
 						Example text 2
@@ -103,9 +88,9 @@ export default function App(): JSX.Element {
 				</Lane>
 			</div>
 
-			<h3>Horizontal (RTL) script</h3>
-			<div className={css({ writingMode: "horizontal-tb", direction: "rtl" })}>
-				<Lane inlineFromWidth={600} alignBlock="center" spacing="1em">
+			<h3>RTL script</h3>
+			<div className={css({ direction: "rtl" })}>
+				<Lane inlineFromWidth={600} alignY="center" spacing="1em">
 					<>
 						מלל ארוך לדוגמא
 						<br />
@@ -119,8 +104,8 @@ export default function App(): JSX.Element {
 
 			<h2>Icon</h2>
 
-			<h3>Horizontal (LTR) script</h3>
-			<div className={css({ writingMode: "horizontal-tb" })}>
+			<h3>LTR script</h3>
+			<div className={css({ direction: "ltr" })}>
 				<div>
 					<Icon label="Close dialog" hideLabel>
 						{crossSVG}
@@ -136,8 +121,8 @@ export default function App(): JSX.Element {
 				</div>
 			</div>
 
-			<h3>Horizontal (RTL) script</h3>
-			<div className={css({ writingMode: "horizontal-tb", direction: "rtl" })}>
+			<h3>RTL script</h3>
+			<div className={css({ direction: "rtl" })}>
 				<div>
 					<Icon label="Close dialog" hideLabel>
 						{crossSVG}
@@ -155,7 +140,7 @@ export default function App(): JSX.Element {
 
 			<h2>Frame</h2>
 
-			<Lane inlineFromWidth={600} alignBlock="start">
+			<Lane inlineFromWidth={600} alignY="start">
 				<Frame aspectRatio={16 / 9} objectPosition="top">
 					<img
 						src="https://via.placeholder.com/100x100"

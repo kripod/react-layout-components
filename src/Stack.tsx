@@ -1,10 +1,7 @@
-/* Inspired by: https://sid.st/unpolished/flex-gap-polyfill/ */
-
 import { css } from "otion";
-import React, { useRef } from "react";
+import React from "react";
 
 import { Spacer } from "./Spacer";
-import { useLogicalCSSPropertyFallback } from "./useLogicalCSSPropertyFallback";
 import {
 	CSSProperties,
 	CSSPropertyAlignItems,
@@ -15,8 +12,8 @@ import {
 export type StackProps = {
 	as?: React.ElementType;
 	childWrapper?: React.ElementType;
-	alignInline?: CSSPropertyAlignItems;
-	alignBlock?: CSSPropertyJustifyContent;
+	alignX?: CSSPropertyAlignItems;
+	alignY?: CSSPropertyJustifyContent;
 	spacing?: CSSProperties["gap"];
 	reverse?: boolean;
 	children?: React.ReactNode;
@@ -25,31 +22,24 @@ export type StackProps = {
 export function Stack({
 	as: Element = "div",
 	childWrapper: ChildWrapper = "div",
-	alignInline,
-	alignBlock,
+	alignX,
+	alignY,
 	spacing,
 	reverse,
 	children,
 }: StackProps): JSX.Element {
 	const nonSpacedChildIndex = reverse ? React.Children.count(children) - 1 : 0;
-
-	const elementRef = useRef<HTMLElement>(null);
-	const { blockStart } = useLogicalCSSPropertyFallback(elementRef);
-
-	const wrapperClassName =
-		// Empty string gets discarded
-		css({ [`margin-${blockStart || "block-start"}`]: spacing }) || undefined;
+	const wrapperClassName = css({ marginTop: spacing }) || undefined;
 
 	return (
 		<Element
-			ref={elementRef}
 			className={css({
 				display: "flex",
 				flexDirection: `column${reverse ? "-reverse" : ""}` as
 					| "column"
 					| "column-reverse",
-				alignItems: prefixFlexAlignmentValue(alignInline),
-				justifyContent: prefixFlexAlignmentValue(alignBlock),
+				alignItems: prefixFlexAlignmentValue(alignX),
+				justifyContent: prefixFlexAlignmentValue(alignY),
 				":only-child": {
 					height: "100%",
 				},

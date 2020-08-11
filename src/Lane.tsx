@@ -1,9 +1,7 @@
-/* Inspired by: https://sid.st/unpolished/flex-gap-polyfill/ */
-
 import { css } from "otion";
 import React, { useRef } from "react";
 
-import { useLogicalCSSPropertyFallback } from "./useLogicalCSSPropertyFallback";
+import { useLogicalInlineCSSProperty } from "./useLogicalInlineCSSProperty";
 import {
 	CSSProperties,
 	CSSPropertyAlignItems,
@@ -16,8 +14,8 @@ export type LaneProps = {
 	as?: React.ElementType;
 	childWrapper?: React.ElementType;
 	inlineFromWidth?: string | number;
-	alignInline?: CSSPropertyJustifyContent;
-	alignBlock?: CSSPropertyAlignItems;
+	alignX?: CSSPropertyJustifyContent;
+	alignY?: CSSPropertyAlignItems;
 	spacing?: CSSProperties["rowGap"];
 	spacingInline?: CSSProperties["columnGap"];
 	reverse?: boolean;
@@ -28,17 +26,18 @@ export function Lane({
 	as: Element = "div",
 	childWrapper: ChildWrapper = "div",
 	inlineFromWidth,
-	alignInline,
-	alignBlock,
+	alignX,
+	alignY,
 	spacing,
 	spacingInline = spacing,
 	reverse,
 	children,
 }: LaneProps): JSX.Element {
 	const elementRef = useRef<HTMLElement>(null);
-	const { blockStart, inlineStart } = useLogicalCSSPropertyFallback(elementRef);
-	const marginBlockStartProperty = `margin-${blockStart || "block-start"}`;
-	const marginInlineStartProperty = `margin-${inlineStart || "inline-start"}`;
+	const [marginInlineStartProperty] = useLogicalInlineCSSProperty(
+		"margin",
+		elementRef,
+	);
 
 	const inlineFromWidthWithUnit = withUnit(inlineFromWidth);
 	const spacingBlockWithUnit = withUnit(spacing);
@@ -46,14 +45,14 @@ export function Lane({
 
 	const wrapperClassName = css({
 		display: "flex",
-		justifyContent: prefixFlexAlignmentValue(alignInline),
+		justifyContent: prefixFlexAlignmentValue(alignX),
 		flexBasis: inlineFromWidthWithUnit
 			? `calc(((${inlineFromWidthWithUnit}) - (100% - (${
 					spacingInlineWithUnit || "0px"
 			  })))*999)`
 			: undefined,
 		flexGrow: 1,
-		[marginBlockStartProperty]: spacingBlockWithUnit,
+		marginTop: spacingBlockWithUnit,
 		[marginInlineStartProperty]: spacingInlineWithUnit,
 	});
 
@@ -64,9 +63,8 @@ export function Lane({
 				display: "flex",
 				flexDirection: reverse ? "row-reverse" : undefined,
 				flexWrap: "wrap",
-				alignItems: prefixFlexAlignmentValue(alignBlock),
-				[marginBlockStartProperty]:
-					spacingBlockWithUnit && `-${spacingBlockWithUnit}`,
+				alignItems: prefixFlexAlignmentValue(alignY),
+				marginTop: spacingBlockWithUnit && `-${spacingBlockWithUnit}`,
 				[marginInlineStartProperty]:
 					spacingInlineWithUnit && `-${spacingInlineWithUnit}`,
 			})}

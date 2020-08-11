@@ -1,9 +1,9 @@
 import { css } from "otion";
 import React from "react";
 
-export interface SpacerProps {
+export type SpacerProps = {
 	minSize?: string | number;
-}
+};
 
 export function Spacer({ minSize }: SpacerProps): JSX.Element {
 	return (

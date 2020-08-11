@@ -1,15 +1,15 @@
-import type * as CSS from "csstype";
+import type { Globals, Properties } from "csstype";
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export type CSSProperties = CSS.Properties<(string & {}) | number>;
+export type CSSProperties = Properties<(string & {}) | number>;
 
 export type CSSPropertyAlignItems = Exclude<
 	CSSProperties["alignItems"],
-	"flex-end" | "flex-start"
+	Globals | "normal" | "flex-end" | "flex-start"
 >;
 export type CSSPropertyJustifyContent = Exclude<
 	CSSProperties["justifyContent"],
-	"flex-end" | "flex-start"
+	Globals | "normal" | "flex-end" | "flex-start" | "left" | "right"
 >;
 
 export function prefixFlexAlignmentValue(
@@ -17,6 +17,14 @@ export function prefixFlexAlignmentValue(
 ): string | undefined {
 	// Transform "end"/"start" into the more supported "flex-end"/"flex-start"
 	return value === "end" || value === "start" ? `flex-${value}` : value;
+}
+
+export function supportsProperty(property: string): boolean {
+	return (
+		typeof CSS !== "undefined" /* Support IE 9+ */ &&
+		CSS.supports /* Support SSR */ &&
+		CSS.supports(property, "inherit")
+	);
 }
 
 export function withUnit(

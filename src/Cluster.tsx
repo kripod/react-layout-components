@@ -2,7 +2,7 @@ import { css } from "otion";
 import React, { useRef } from "react";
 
 import { Spacer } from "./Spacer";
-import { useLogicalCSSPropertyFallback } from "./useLogicalCSSPropertyFallback";
+import { useLogicalInlineCSSProperty } from "./useLogicalInlineCSSProperty";
 import {
 	CSSProperties,
 	CSSPropertyAlignItems,
@@ -14,8 +14,8 @@ import {
 export type ClusterProps = {
 	as?: React.ElementType;
 	childWrapper?: React.ElementType;
-	alignInline?: CSSPropertyJustifyContent;
-	alignBlock?: CSSPropertyAlignItems;
+	alignX?: CSSPropertyJustifyContent;
+	alignY?: CSSPropertyAlignItems;
 	spacing?: CSSProperties["gap"];
 	children?: React.ReactNode;
 };
@@ -23,23 +23,23 @@ export type ClusterProps = {
 export function Cluster({
 	as: Element = "div",
 	childWrapper: ChildWrapper = "div",
-	alignInline,
-	alignBlock,
+	alignX,
+	alignY,
 	spacing,
 	children,
 }: ClusterProps): JSX.Element {
 	const elementRef = useRef<HTMLElement>(null);
-	const { blockStart, inlineStart } = useLogicalCSSPropertyFallback(elementRef);
-	const marginBlockStartProperty = `margin-${blockStart || "block-start"}`;
-	const marginInlineStartProperty = `margin-${inlineStart || "inline-start"}`;
+	const [marginInlineStartProperty] = useLogicalInlineCSSProperty(
+		"margin",
+		elementRef,
+	);
 
 	const spacingWithUnit = withUnit(spacing);
 	const negativeSpacingWithUnit = spacingWithUnit && `-${spacingWithUnit}`;
 
 	const wrapperClassName =
-		// Empty string gets discarded
 		css({
-			[marginBlockStartProperty]: spacingWithUnit,
+			marginTop: spacingWithUnit,
 			[marginInlineStartProperty]: spacingWithUnit,
 		}) || undefined;
 
@@ -49,9 +49,9 @@ export function Cluster({
 			className={css({
 				display: "flex",
 				flexWrap: "wrap",
-				alignItems: prefixFlexAlignmentValue(alignBlock),
-				justifyContent: prefixFlexAlignmentValue(alignInline),
-				[marginBlockStartProperty]: negativeSpacingWithUnit,
+				alignItems: prefixFlexAlignmentValue(alignY),
+				justifyContent: prefixFlexAlignmentValue(alignX),
+				marginTop: negativeSpacingWithUnit,
 				[marginInlineStartProperty]: negativeSpacingWithUnit,
 			})}
 		>
@@ -59,7 +59,9 @@ export function Cluster({
 				React.isValidElement(child) && child.type === Spacer ? (
 					child
 				) : (
-					<ChildWrapper className={wrapperClassName}>{child}</ChildWrapper>
+					<ChildWrapper className={wrapperClassName || undefined}>
+						{child}
+					</ChildWrapper>
 				),
 			)}
 		</Element>
